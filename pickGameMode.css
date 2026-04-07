@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
+
+body {
+      margin: 0;
+      min-height: 100vh;
+      background: #050611;
+      color: #ececec;
+      font-family: "Comfortaa";
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+    .mask {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.82);
+      display: grid;
+      place-items: center;
+      z-index: 10;
+    }
+    .dialog {
+      width: min(480px, 100%);
+      padding: 28px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(16, 24, 58, 0.98), rgba(8, 12, 30, 0.95));
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 32px 90px rgba(0, 0, 0, 0.4);
+      text-align: center;
+    }
+    .dialog h1 {
+      margin: 0 0 14px;
+      font-size: clamp(2rem, 3vw, 2.6rem);
+    }
+    .dialog p {
+      margin: 0 0 24px;
+      color: #c2c6e6;
+      line-height: 1.6;
+    }
+    .dialog button {
+      width: 100%;
+      padding: 14px 18px;
+      margin: 8px 0;
+      border: none;
+      font-family: "Comfortaa";
+      border-radius: 16px;
+      background: #4c5cff;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.15s ease, background 0.2s ease;
+    }
+    .dialog button:hover {
+      transform: translateY(-1px);
+      background: #6d7bff;
+    }
+    .hidden { display: none; }

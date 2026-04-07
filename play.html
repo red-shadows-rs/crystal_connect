@@ -1,0 +1,115 @@
+<!--
+  Crystal Connect | RS PROJECT
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crystal Connect - Play</title>
+  <meta name="description" content="Choose a game mode: play against the bot or a second player on the same device." />
+  <meta name="author" content="RED SHADOWS | RS - Digital Excellence" />
+  <link rel="stylesheet" href="pickGameMode.css" />
+</head>
+<body>
+  <div class="mask" id="modeOverlay">
+    <div class="dialog">
+      <h1>Choose Your Game Mode</h1>
+      <p>Play against the bot or with another player on the same device.</p>
+      <button id="vsBotBtn">Play vs Bot</button>
+      <button id="vsHumanBtn">Play vs Human</button>
+    </div>
+  </div>
+
+  <div class="app-shell hidden" id="gameShell">
+    <header>
+      <h1 id="gameTitle">Crystal Connect</h1>
+      <p id="gameSubtitle">Connect crystals to form chains and score points!</p>
+    </header>
+
+    <section class="canvas-wrapper">
+      <canvas id="gameCanvas" width="600" height="600"></canvas>
+    </section>
+
+    <section class="controls">
+      <button id="restartBtn">Restart</button>
+      <div class="status">
+        <span>Status:</span>
+        <strong id="gameStatus">Click on a line to play</strong>
+      </div>
+      <div class="scoreboard">
+        <div><strong id="playerLabel">You:</strong> <span id="playerScore">0</span></div>
+        <div><strong id="player2Label">Enemy:</strong> <span id="player2Score">0</span></div>
+      </div>
+    </section>
+
+    <section class="legend">
+      <div><span class="tile player"></span> Player 1</div>
+      <div><span class="tile enemy"></span> Player 2 / Bot</div>
+      <div><span class="tile line"></span> Available Line</div>
+      <div><span class="tile line-taken"></span> Taken Line</div>
+    </section>
+  </div>
+    <section class="footer">
+      <span style="color: grey; font-size: 0.9rem;">Crafted with ❤️ by RED SHADOWS | RS</span>
+    </section>
+  <script>
+    const modeOverlay = document.getElementById('modeOverlay');
+    const gameShell = document.getElementById('gameShell');
+    const playerLabel = document.getElementById('playerLabel');
+    const player2Label = document.getElementById('player2Label');
+    const gameTitle = document.getElementById('gameTitle');
+    const gameSubtitle = document.getElementById('gameSubtitle');
+
+    function loadStyle(path) {
+      let link = document.querySelector('link[data-game-style]');
+      if (!link) {
+        link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.dataset.gameStyle = 'true';
+        document.head.appendChild(link);
+      }
+      link.href = path;
+    }
+
+    function loadScript(path) {
+      return new Promise((resolve, reject) => {
+        const existing = document.querySelector('script[data-game-script]');
+        if (existing) {
+          existing.remove();
+        }
+        const script = document.createElement('script');
+        script.src = path;
+        script.dataset.gameScript = 'true';
+        script.onload = resolve;
+        script.onerror = () => reject(new Error(`Failed to load ${path}`));
+        document.body.appendChild(script);
+      });
+    }
+
+    async function startMode(folder, player1Text, player2Text, titleText) {
+      playerLabel.textContent = player1Text;
+      player2Label.textContent = player2Text;
+      gameTitle.textContent = titleText;
+      modeOverlay.classList.add('hidden');
+      gameShell.classList.remove('hidden');
+      loadStyle(`${folder}/style.css`);
+      try {
+        await loadScript(`${folder}/script.js`);
+      } catch (error) {
+        alert('Error loading the game. Please reload the page.');
+        console.error(error);
+      }
+    }
+
+    document.getElementById('vsBotBtn').addEventListener('click', () => {
+      startMode('VSAI', 'You:', 'Enemy:', 'Crystal Connect - vs Bot');
+    });
+
+    document.getElementById('vsHumanBtn').addEventListener('click', () => {
+      startMode('VSPLAYER', 'Player 1:', 'Player 2:', 'Crystal Connect - vs Human');
+    });
+  </script>
+</body>
+</html>
