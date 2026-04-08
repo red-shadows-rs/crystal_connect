@@ -1,3 +1,5 @@
+/* Crystal Connect - Stylish CSS for a sleek gaming experience */
+
 @import url('https://fonts.googleapis.com/css2?family=Comfortaa&display=swap');
 
 * {
@@ -9,15 +11,17 @@ body {
   min-height: 100vh;
   display: grid;
   place-items: center;
-  padding: 24px;
+  padding: clamp(12px, 3vw, 24px);
   font-family: "Comfortaa";
   background: radial-gradient(circle at top, #13152b 0%, #06070f 55%, #04050a 100%);
+  color: #fff;
 }
 
 .app-shell {
-  width: min(980px, 100%);
+  width: 100%;
+  max-width: 980px; 
   display: grid;
-  gap: 18px;
+  gap: clamp(10px, 2vw, 18px);
 }
 
 header {
@@ -26,111 +30,43 @@ header {
 
 h1 {
   margin: 0;
-  font-size: clamp(2rem, 3vw, 3rem);
+  font-size: clamp(1.5rem, 5vw, 3rem);
 }
 
 p {
   margin: 8px auto 0;
   max-width: 680px;
   color: #d0d0d0;
+  font-size: clamp(0.85rem, 2vw, 1rem);
 }
 
 .canvas-wrapper {
   width: 100%;
+  position: relative;
   overflow: hidden;
-  border-radius: 28px;
+  border-radius: clamp(16px, 4vw, 28px);
   background: linear-gradient(180deg, rgba(8, 14, 38, 0.95), rgba(13, 18, 42, 0.98));
-  padding: 22px;
+  padding: clamp(10px, 3vw, 22px);
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 28px 80px rgba(0, 0, 0, 0.55);
 }
 
 canvas {
   width: 100%;
-  height: auto;
+  height: auto; 
+  max-height: 70vh; 
   display: block;
-  border-radius: 18px;
+  border-radius: 12px;
   background: linear-gradient(180deg, #060813 0%, #111620 100%);
   cursor: crosshair;
-  box-shadow: inset 0 0 24px rgba(70, 98, 255, 0.08);
 }
 
 .controls {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 14px;
+  grid-template-columns: 1fr;
+  gap: 16px;
   align-items: center;
-}
-
-.status {
-  justify-self: center;
-}
-
-.scoreboard {
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: 14px;
-  justify-self: end;
-  color: #cfd8ff;
-}
-
-.scoreboard div {
-  padding: 10px 14px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-button {
-  border: none;
-  border-radius: 14px;
-  font-family: "Comfortaa";
-  padding: 12px 22px;
-  background: #2f2fb5;
-  color: #ccc;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: transform 0.15s ease, background 0.2s ease;
-}
-
-button:hover {
-  transform: translateY(-1px);
-  background: #4545df;
-}
-
-.status {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 1rem;
-}
-
-.status strong {
-  color: #b9c4ff;
-}
-
-legend,
-.legend {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(90px, 1fr));
-  gap: 12px;
-}
-
-.legend div {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 14px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.tile {
-  width: 22px;
-  height: 22px;
-  border-radius: 4px;
-  display: inline-block;
+  text-align: center;
 }
 
 .player {
@@ -149,14 +85,82 @@ legend,
   background: #6a85ff;
 }
 
-.goal,
-.wall,
-.floor {
-  display: none;
+@media (min-width: 768px) {
+  .controls {
+    grid-template-columns: auto 1fr auto;
+    text-align: left;
+  }
 }
 
-@media (max-width: 640px) {
-  .legend {
-    grid-template-columns: repeat(2, minmax(80px, 1fr));
+.status {
+  justify-self: center;
+  font-size: clamp(0.9rem, 2vw, 1rem);
+}
+
+.status strong {
+  color: #b9c4ff;
+}
+
+.scoreboard {
+  display: flex;
+  justify-content: center;
+  gap: clamp(8px, 2vw, 14px);
+}
+
+@media (min-width: 768px) {
+  .scoreboard {
+    justify-self: end;
   }
+}
+
+.scoreboard div {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  font-size: 0.9rem;
+}
+
+button {
+  width: 100%;
+  max-width: 200px;
+  margin: 0 auto;
+  border: none;
+  border-radius: 12px;
+  font-family: "Comfortaa";
+  padding: 12px 20px;
+  background: #2f2fb5;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+@media (min-width: 768px) {
+  button {
+    width: auto;
+    margin: 0;
+  }
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: clamp(8px, 2vw, 12px);
+  margin-top: 10px;
+}
+
+.legend div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  font-size: 0.85rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tile {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
 }
