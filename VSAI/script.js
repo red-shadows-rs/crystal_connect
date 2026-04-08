@@ -6,6 +6,8 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const statusText = document.getElementById("gameStatus");
 const restartBtn = document.getElementById("restartBtn");
+const mainBtn = document.getElementById("mainBtn");
+
 const playerScoreText = document.getElementById("playerScore");
 const player2ScoreText = document.getElementById("player2Score");
 
@@ -156,6 +158,18 @@ function wouldCreateThirdSide(m) {
     return dangerous;
 }
 
+function resetGame() {
+    state.horizontal = Array.from({ length: GRID_SIZE }, () => Array(GRID_SIZE - 1).fill(0));
+    state.vertical = Array.from({ length: GRID_SIZE - 1 }, () => Array(GRID_SIZE).fill(0));
+    state.boxes = Array.from({ length: GRID_SIZE - 1 }, () => Array(GRID_SIZE - 1).fill(0));
+    state.currentPlayer = 1;
+    state.scores = { 1: 0, 2: 0 };
+    state.hoverEdge = null;
+    state.pointer = null;
+    updateUI();
+    render();
+}
+
 function drawHoverHighlight() {
     if (!state.hoverEdge || !state.pointer || state.currentPlayer !== 1) return;
     const edge = state.hoverEdge;
@@ -285,9 +299,18 @@ function updateUI() {
 
 function isBoardComplete() { return getAllAvailableMoves().length === 0; }
 
-restartBtn.addEventListener("click", () => { location.reload(); });
-window.addEventListener("resize", render);
+restartBtn.addEventListener("click", () => {
+  resetGame();
+});
 
+mainBtn.addEventListener("click", () => { location.reload(); });
+
+window.addEventListener("resize", () => {
+  resizeCanvas();
+  render();
+});
+
+resetGame();
 resizeCanvas();
 render();
 updateUI();
