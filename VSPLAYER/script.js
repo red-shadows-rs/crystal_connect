@@ -6,6 +6,7 @@ const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 const statusText = document.getElementById("gameStatus");
 const restartBtn = document.getElementById("restartBtn");
+const mainBtn = document.getElementById("mainBtn");
 const playerScoreText = document.getElementById("playerScore");
 const player2ScoreText = document.getElementById("player2Score");
 
@@ -378,6 +379,8 @@ canvas.addEventListener("click", (event) => {
 restartBtn.addEventListener("click", () => {
   resetGame();
 });
+
+mainBtn.addEventListener("click", () => { location.reload(); });
 
 window.addEventListener("resize", () => {
   resizeCanvas();
