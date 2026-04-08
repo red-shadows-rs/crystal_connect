@@ -18,8 +18,6 @@
 - `VSAI/`: Contains game files for playing against the bot (AI mode).
 - `VSPLAYER/`: Contains game files for playing against another human player.
 - `play.html`: Main entry point with mode selection.
-- `index.html`: Automatic redirect to `play.html`.
-- `README.md`: This file.
 
 ## 🌍 Language Support
 
@@ -27,7 +25,7 @@ The game interface is in English. If you wish to add support for another languag
 
 - `play.html`
 - `VSAI/script.js`
-- `VSAI/style.css`
+- `VSPLAYER/script.js`
 
 ## 🚧 Developer Notes
 
