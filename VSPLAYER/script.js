@@ -38,34 +38,27 @@ const state = {
 };
 
 function resizeCanvas() {
-  const dpr = window.devicePixelRatio || 1;
-  const width = canvas.clientWidth * dpr;
-  const height = canvas.clientHeight * dpr;
-  if (canvas.width !== width || canvas.height !== height) {
-    canvas.width = width;
-    canvas.height = height;
-  }
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = canvas.clientWidth * dpr;
+    canvas.height = canvas.clientHeight * dpr;
 }
 
 function getBoardMetrics() {
-  const dpr = window.devicePixelRatio || 1;
-  const boardSize = Math.min(canvas.width, canvas.height) - PADDING * 2 * dpr;
-  const spacing = boardSize / ((GRID_SIZE - 1) * Math.SQRT2);
-  return {
-    spacing,
-    centerX: canvas.width / 2,
-    centerY: canvas.height / 2,
-  };
+    const dpr = window.devicePixelRatio || 1;
+    const boardSize = Math.min(canvas.width, canvas.height) - PADDING * 2 * dpr;
+    const spacing = boardSize / ((GRID_SIZE - 1) * Math.SQRT2);
+    return { spacing, centerX: canvas.width / 2, centerY: canvas.height / 2 };
 }
 
 function dotPosition(row, col) {
-  const { spacing, centerX, centerY } = getBoardMetrics();
-  const offset = (GRID_SIZE - 1) / 2;
-  const gridX = (col - offset) * spacing;
-  const gridY = (row - offset) * spacing;
-  const x = (gridX - gridY) / Math.SQRT2 + centerX;
-  const y = (gridX + gridY) / Math.SQRT2 + centerY;
-  return { x, y };
+    const { spacing, centerX, centerY } = getBoardMetrics();
+    const offset = (GRID_SIZE - 1) / 2;
+    const gridX = (col - offset) * spacing;
+    const gridY = (row - offset) * spacing;
+    return {
+        x: (gridX - gridY) / Math.SQRT2 + centerX,
+        y: (gridX + gridY) / Math.SQRT2 + centerY
+    };
 }
 
 function drawBoxes() {
